@@ -136,3 +136,5 @@ variable "sg_for_fargate" {
   default = ""
 }
 
+variable "env" {}
+

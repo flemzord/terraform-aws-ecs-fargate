@@ -1,5 +1,5 @@
 resource "aws_cloudwatch_log_group" "containers" {
-  name              = "/aws/ecs/${var.service_name}"
+  name              = "/aws/ecs/${var.env}/${var.service_name}"
   retention_in_days = 7
 }
 
