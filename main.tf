@@ -13,7 +13,7 @@ resource "aws_ecs_service" "this" {
   force_new_deployment               = var.force_new_deployment
   health_check_grace_period_seconds  = 0
   launch_type                        = "FARGATE"
-  name                               = var.service_name
+  name                               = "${var.service_name}-${var.env}"
   platform_version                   = var.platform_version
   propagate_tags                     = "SERVICE"
   task_definition                    = "${aws_ecs_task_definition.this.family}:${max(aws_ecs_task_definition.this.revision, data.aws_ecs_task_definition.this.revision)}"
@@ -38,7 +38,7 @@ resource "aws_ecs_task_definition" "this" {
   container_definitions    = var.container_definitions
   cpu                      = var.cpu
   execution_role_arn       = var.task_execution_role_arn
-  family                   = var.service_name
+  family                   = "${var.service_name}-${var.env}"
   memory                   = var.memory
   network_mode             = "awsvpc"
   requires_compatibilities = var.requires_compatibilities
